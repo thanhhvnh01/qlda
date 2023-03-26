@@ -53,8 +53,8 @@ const Navbar = ({ ...props }) => {
 
   const [dropDownData, setDropDownData] = useState([]);
 
-  const fetchDropDownData = async (initLang) => {
-    const res = await getProductForHomePageAPI(initLang);
+  const fetchDropDownData = async () => {
+    const res = await getProductForHomePageAPI();
     setDropDownData(res.data);
   };
 

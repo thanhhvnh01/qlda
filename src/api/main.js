@@ -8,13 +8,14 @@ export const getImagesAPI = async () => {
 };
 
 // dropdown
-export const getProductForHomePageAPI = async (lang) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/categories/product-types?lang=${lang}`, { __auth: false });
+export const getProductForHomePageAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/products`, { __auth: false });
 };
 // best sale products
-export const getBestSaleProductsAPI = async (lang) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/products/best-selling?lang=${lang}`, { __auth: false });
+export const getBestSaleProductsAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/products`);
 };
+
 // supporter
 export const getSupportersAPI = async (pageSize, pageNumber) => {
   return axios.get(
@@ -69,3 +70,8 @@ export const sendMessageAPI = async (data) => {
 };
 
 // * end contact section
+
+export const getAllProductsAPI = async () => {
+  return Products;
+};
+
