@@ -67,6 +67,7 @@ const Navbar = ({ ...props }) => {
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
       <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
       <NavbarItems dropDownData={dropDownData} isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
+
       {isOpen && <NavbarVertical data={dropDownData} isOpen={isOpen} onClose={onClose} />}
     </NavBarContainer>
   );
