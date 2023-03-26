@@ -15,8 +15,8 @@ option {
 }
 
 .navbar-item:hover {
-  color: #ffa800;
-  border-color: #ffa800 !important;
+  color: #FFFFFF;
+  border-color: #FFFFFF !important;
 }
 
 a {
@@ -42,7 +42,7 @@ ul {
 }
 
 .menu-item {
-  color: #ffea85;
+  color: #FFFFFF;
   background-color: #575757;
   text-transform: uppercase;
   border-bottom: 1px solid black;

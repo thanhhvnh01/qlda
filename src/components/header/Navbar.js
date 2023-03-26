@@ -3,6 +3,7 @@ import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React, { useEffect, useState } from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
+import Cart from "./Cart";
 import LocaleHeader from "./LocaleHeader";
 import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
@@ -32,7 +33,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         p={4}
         maxW="1230px"
         sx={{ ml: "auto", mr: "auto" }}
-        color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
+        color={["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]}
         {...props}
       >
         {children}

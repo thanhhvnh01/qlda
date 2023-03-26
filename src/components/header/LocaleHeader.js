@@ -22,9 +22,7 @@ const LocaleHeader = ({ isMobile, ...props }) => {
           w="100%"
           sx={{ alignContent: "center", justifyContent: !isMobile ? "space-between" : "space-between" }}
         >
-          <Text ml={2} fontSize={["10px", "12px", "12px", "12px", "12px"]}>
-            ANDREAHAIRVN.COM
-          </Text>
+          <Text ml={2} fontSize={["10px", "12px", "12px", "12px", "12px"]}></Text>
           <HStack spacing="20px">
             {!isMobile && (
               <>

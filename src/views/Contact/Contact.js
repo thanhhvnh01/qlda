@@ -145,120 +145,49 @@ const Contact = () => {
             <FormattedMessage id="label.any" />
           </Text>
         </Box>
-        {!isMobile ? (
-          <Flex bg="#FFFFFF" my={5}>
-            <Grid templateColumns="repeat(10, 1fr)" w="100%">
-              <GridItem colSpan={4} bg="url('/backgrounds/contact_2.jpg')">
-                <Box sx={{ p: 10 }}>
-                  <Text
-                    fontSize={["16px", "24px", "24px", "24px", "24px"]}
-                    fontWeight="bold"
-                    color="#FFFFFF"
-                    textTransform="uppercase"
-                  >
-                    <FormattedMessage id="label.contactInformation" />
-                  </Text>
-                  <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.saySomething" />
-                  </Text>
-                  <VStack alignItems="flex-start" mt={5} spacing={4}>
-                    <HStack mt={10}>
-                      <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
-                      <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.phoneNumber" />
-                      </Text>
-                    </HStack>
-                    <HStack mt={10}>
-                      <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                      <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.email" />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                      <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.address" />
-                      </Text>
-                    </HStack>
-                  </VStack>
-                </Box>
-              </GridItem>
-              <GridItem w="100%" colSpan={6} sx={{ mt: "auto", mb: "auto", display: "flex" }}>
-                <Box w="100%" p={6} py={10}>
-                  <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                    <Grid templateColumns="repeat(2,1fr)" gap={10}>
-                      <GridItem colSpan={1}>
-                        <Box>
-                          <Text>
-                            <FormattedMessage id="label.firstName" />
-                          </Text>
-                          <RHFInput name="firstName" variant="flushed" />
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={1}>
-                        <Box>
-                          <Text>
-                            <FormattedMessage id="label.lastName" />
-                          </Text>
-                          <RHFInput name="lastName" variant="flushed" />
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={1}>
-                        <Box>
-                          <Text>
-                            <FormattedMessage id="label.email" />
-                          </Text>
-                          <RHFInput name="email" variant="flushed" />
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={1}>
-                        <Box>
-                          <Text>
-                            <FormattedMessage id="label.phoneNumber" />
-                          </Text>
-                          <RHFInput name="phoneNumber" variant="flushed" />
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={2}>
-                        <Box>
-                          <Text>
-                            <FormattedMessage id="label.message" />
-                          </Text>
-                          <RHFInput
-                            placeholder={intl.formatMessage({ id: "placeholder.message" })}
-                            name="message"
-                            variant="flushed"
-                          />
-                        </Box>
-                      </GridItem>
-                    </Grid>
-                    <Box sx={{ display: "flex", mt: 10 }}>
-                      <Button
-                        _hover={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
-                        disabled={!isDirty || !isValid}
-                        type="submit"
-                        ml="auto"
-                        p={6}
-                        bg="#000000"
-                        variant="solid"
-                        fontWeight="500"
-                        textTransform="none"
-                      >
-                        <FormattedMessage id="button.sendMessage" />
-                      </Button>
-                    </Box>
-                  </FormProvider>
-                </Box>
-              </GridItem>
-            </Grid>
-          </Flex>
-        ) : (
-          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-              <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
-                <Box w="100%" p={6} py={10}>
+
+        <Flex bg="#FFFFFF" my={5}>
+          <Grid templateColumns="repeat(10, 1fr)" w="100%">
+            <GridItem colSpan={5} bg="url('/backgrounds/contact_2.jpg')">
+              <Box sx={{ p: 10 }}>
+                <Text
+                  fontSize={["16px", "24px", "24px", "24px", "24px"]}
+                  fontWeight="bold"
+                  color="#FFFFFF"
+                  textTransform="uppercase"
+                >
+                  <FormattedMessage id="label.contactInformation" />
+                </Text>
+                <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+                  <FormattedMessage id="label.saySomething" />
+                </Text>
+                <VStack alignItems="flex-start" mt={5} spacing={4}>
+                  <HStack mt={10}>
+                    <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
+                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+                      <FormattedMessage id="info.phoneNumber" />
+                    </Text>
+                  </HStack>
+                  <HStack mt={10}>
+                    <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
+                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+                      <FormattedMessage id="info.email" />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
+                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+                      <FormattedMessage id="info.address" />
+                    </Text>
+                  </HStack>
+                </VStack>
+              </Box>
+            </GridItem>
+            <GridItem w="100%" colSpan={5} sx={{ mt: "auto", mb: "auto", display: "flex" }}>
+              <Box w="100%" p={6} py={10}>
+                <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                   <Grid templateColumns="repeat(2,1fr)" gap={10}>
-                    <GridItem colSpan={2}>
+                    <GridItem colSpan={1}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.firstName" />
@@ -266,14 +195,15 @@ const Contact = () => {
                         <RHFInput name="firstName" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={2}>
+                    <GridItem colSpan={1}>
                       <Box>
-                        <FormattedMessage id="label.lastName" />
-                        <Text></Text>
+                        <Text>
+                          <FormattedMessage id="label.lastName" />
+                        </Text>
                         <RHFInput name="lastName" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={2}>
+                    <GridItem colSpan={1}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.email" />
@@ -281,7 +211,7 @@ const Contact = () => {
                         <RHFInput name="email" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={2}>
+                    <GridItem colSpan={1}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.phoneNumber" />
@@ -302,11 +232,12 @@ const Contact = () => {
                       </Box>
                     </GridItem>
                   </Grid>
-                  <Box sx={{ display: "flex", mt: 10, justifyContent: "center" }}>
+                  <Box sx={{ display: "flex", mt: 10 }}>
                     <Button
                       _hover={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
                       disabled={!isDirty || !isValid}
                       type="submit"
+                      ml="auto"
                       p={6}
                       bg="#000000"
                       variant="solid"
@@ -316,46 +247,11 @@ const Contact = () => {
                       <FormattedMessage id="button.sendMessage" />
                     </Button>
                   </Box>
-                </Box>
-              </GridItem>
-              <GridItem colSpan={1} bg="url('/backgrounds/contact_2.jpg')">
-                <Box sx={{ p: 10 }}>
-                  <Text
-                    fontSize={["22px", "24px", "24px", "24px", "24px"]}
-                    fontWeight="bold"
-                    color="#FFFFFF"
-                    textTransform="uppercase"
-                  >
-                    <FormattedMessage id="label.contactInformation" />
-                  </Text>
-                  <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.saySomething" />
-                  </Text>
-                  <VStack alignItems="flex-start" mt={5} spacing={4}>
-                    <HStack mt={10}>
-                      <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
-                      <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.phoneNumber" />
-                      </Text>
-                    </HStack>
-                    <HStack mt={10}>
-                      <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                      <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.email" />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                      <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.address" />
-                      </Text>
-                    </HStack>
-                  </VStack>
-                </Box>
-              </GridItem>
-            </Grid>
-          </FormProvider>
-        )}
+                </FormProvider>
+              </Box>
+            </GridItem>
+          </Grid>
+        </Flex>
 
         <Box bgImage="url('/backgrounds/support_background.png')">
           <Box pb={5}>

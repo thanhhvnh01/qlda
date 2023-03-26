@@ -47,15 +47,8 @@ export const getColorAPI = async (lang) => {
 };
 
 // product
-export const getProductsAPI = async (pageSize, pageNumber, orderByTypeId, orderBy, keyword = "", lang, data) => {
-  return axios.post(
-    `${
-      process.env.REACT_APP_API_URL
-    }/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${encodeURI(
-      keyword
-    )}&lang=${lang}&orderByTypeId=${orderByTypeId}&orderBy=${orderBy}`,
-    data
-  );
+export const getProductsAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/products`);
 };
 
 export const getProductDetailsAPI = async (productId, lang) => {
@@ -76,7 +69,3 @@ export const sendMessageAPI = async (data) => {
 };
 
 // * end contact section
-
-export const getAllProductsAPI = async () => {
-  return Products;
-};

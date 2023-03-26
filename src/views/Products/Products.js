@@ -112,10 +112,8 @@ const Products = () => {
     debounce(async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
       try {
         setIsLoading(true);
-        const productRes = await getAllProductsAPI();
-        const pageCount = Math.round(productRes.data.paging.totalItem / 9);
-        setPageCount(pageCount);
-        setProducts(productRes.data.pageData);
+        const productRes = await getProductsAPI();
+        setProducts(productRes.data);
       } catch (error) {
         toast({
           title: "Api error",
@@ -152,6 +150,7 @@ const Products = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIdParam, productTypeId, bestSelling, colorId]);
 
+  console.log(products);
   // * actions
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
@@ -455,9 +454,9 @@ const ProductSection = ({
                   key={index}
                   isBestSelling={item.isBestSelling}
                   title={item.productName}
-                  thumbImage={item.mainImageUrl}
-                  images={item.imageUrls}
-                  subtitle={item.productTypeName}
+                  thumbImage={item.image[0]}
+                  images={item.image}
+                  subtitle={item.brand}
                   onClick={() => {
                     handleOnClick(item);
                   }}

@@ -4,6 +4,7 @@ import DropDownSubmenu from "@components/DropDownSubmenu";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
+import Cart from "./Cart";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -71,9 +72,7 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
             </Flex>
           }
         />
-        <NavbarItem to="/contact">
-          <FormattedMessage id="title.contact" />
-        </NavbarItem>
+
         <Flex
           className="navbar-item"
           onClick={() => {
@@ -85,10 +84,13 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
           fontWeight="500"
           textTransform="uppercase"
           display="block"
-          sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4, cursor: "pointer" }}
+          sx={{ border: "2px solid #FFFFFF !important", p: 1, px: 4, cursor: "pointer" }}
         >
           <FormattedMessage id="title.subscribe" />
         </Flex>
+        <NavbarItem to="/contact">
+          <Cart />
+        </NavbarItem>
       </Stack>
     </Box>
   );

@@ -7,7 +7,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ImageSlider = ({ images }) => {
   const [isMobile] = useMobile();
-  console.log();
 
   return (
     <Container p={0} maxW={["100%", "100%", "100%", "1200px", "1200px"]}>
