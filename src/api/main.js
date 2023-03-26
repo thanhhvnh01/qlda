@@ -1,5 +1,5 @@
 import axios from "./base";
-
+import { Products } from "./data/Product";
 //* home section
 
 // image
@@ -76,3 +76,7 @@ export const sendMessageAPI = async (data) => {
 };
 
 // * end contact section
+
+export const getAllProductsAPI = async () => {
+  return Products;
+};

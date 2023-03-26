@@ -32,7 +32,7 @@ import MobileProductFilter from "@components/MobileProductFilter";
 import { BsFilter, BsFilterLeft } from "react-icons/bs";
 // paging
 import { getErrorMessage } from "@api/handleApiError";
-import { getProductsAPI } from "@api/main";
+import { getAllProductsAPI, getProductsAPI } from "@api/main";
 import { FormProvider } from "@components/hook-form";
 import { OrderByTypeEnum } from "@utility/constant";
 import { debounce } from "lodash";
@@ -112,7 +112,7 @@ const Products = () => {
     debounce(async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
       try {
         setIsLoading(true);
-        const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
+        const productRes = await getAllProductsAPI();
         const pageCount = Math.round(productRes.data.paging.totalItem / 9);
         setPageCount(pageCount);
         setProducts(productRes.data.pageData);

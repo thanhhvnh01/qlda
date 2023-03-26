@@ -30,26 +30,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
   const [supporterData, setSupporterData] = useState([]);
-  const [slideImages, setSlideImages] = useState([]);
-
-  const fetchImageData = async () => {
-    try {
-      const res = await getImagesAPI();
-      setSlideImages(res.data);
-    } catch (error) {
-      toast({
-        title: "Api error",
-        description: getErrorMessage(error),
-        status: "error",
-        duration: 3000,
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchImageData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [slideImages, setSlideImages] = useState(["public/images/background-header.png"]);
 
   const fetchProductData = async (lang) => {
     try {
