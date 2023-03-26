@@ -12,7 +12,7 @@
   "/* label */": "label",
   "label.socialNetwork": "Социальная сеть",
   "label.supportOnline": "Поддержка онлайн",
-  "label.bestSelling": "Бестселлер",
+  "label.bestSelling": "Bán chạy nhất",
   "label.subscribe": "Подписывайся",
   "label.subscribeForInfo": "Подписаться на нашу рассылку",
   "label.newsLetter": "Новостная рассылка",
@@ -43,6 +43,7 @@
   "label.hairStyle": "Прическа",
   "label.description": "Описание",
   "label.packing": "Упаковка",
+  "label.AdidasOffice": "Giày Adidas chính hãng",
 
   "/* info */": "info",
   "info.address": "Dong Bich , Dong Tho, Yen Phong, Bac Ninh",

@@ -17,7 +17,7 @@ import { useInView } from "react-intersection-observer";
 import { FormattedMessage } from "react-intl";
 // slider
 import { getErrorMessage } from "@api/handleApiError";
-import { getBestSaleProductsAPI, getImagesAPI, getSupportersAPI } from "@api/main";
+import { getBestSaleProductsAPI, getSupportersAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
@@ -32,10 +32,10 @@ const Home = () => {
   const [supporterData, setSupporterData] = useState([]);
   const [slideImages, setSlideImages] = useState(["public/images/background-header.png"]);
 
-  const fetchProductData = async (lang) => {
+  const fetchProductData = async () => {
     try {
-      const res = await getBestSaleProductsAPI(lang);
-      setProductsData(res.data.pageData);
+      const res = await getBestSaleProductsAPI();
+      setProductsData(res.data);
     } catch (error) {
       toast({
         title: "Api error",
@@ -54,7 +54,7 @@ const Home = () => {
   const fetchSupporterData = async () => {
     try {
       const res = await getSupportersAPI(3, 1);
-      setSupporterData(res.data.pageData);
+      setSupporterData(res.data);
     } catch (error) {
       toast({
         title: "Api error",

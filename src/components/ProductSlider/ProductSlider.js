@@ -104,9 +104,9 @@ const ProductSlider = ({ data, isMobile }) => {
                 key={index}
                 isBestSelling={item.isBestSelling}
                 title={item.productName}
-                thumbImage={item.mainImageUrl}
-                images={item.imageUrls}
-                subtitle={item.productTypeName}
+                thumbImage={item.image[0]}
+                images={item.image}
+                subtitle={item.brand}
                 onClick={() => {
                   handleOnClick(item);
                 }}
@@ -126,9 +126,9 @@ const ProductSlider = ({ data, isMobile }) => {
                 key={index}
                 isBestSelling={item.isBestSelling}
                 title={item.productName}
-                thumbImage={item.mainImageUrl}
-                images={item.imageUrls}
-                subtitle={item.productTypeName}
+                thumbImage={item.image[0]}
+                images={item.image}
+                subtitle={item.brand}
                 onClick={() => {
                   handleOnClick(item);
                 }}
@@ -148,9 +148,9 @@ const ProductSlider = ({ data, isMobile }) => {
                 key={index}
                 isBestSelling={item.isBestSelling}
                 title={item.productName}
-                thumbImage={item.mainImageUrl}
-                images={item.imageUrls}
-                subtitle={item.productTypeName}
+                thumbImage={item.image[0]}
+                images={item.image}
+                subtitle={item.brand}
                 onClick={() => {
                   handleOnClick(item);
                 }}
