@@ -29,13 +29,33 @@ const Home = () => {
   const [isMobile] = useMobile();
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
+  const [listBestSelling, setListBestSelling] = useState([]);
   const [supporterData, setSupporterData] = useState([]);
+  const [adidasBrand, setAdidasBrand] = useState([]);
+  const [nikeBrand, setNikeBrand] = useState([]);
+  const [pumaBrand, setPumaBrand] = useState([]);
   const [slideImages, setSlideImages] = useState(["public/images/background-header.png"]);
 
   const fetchProductData = async () => {
     try {
       const res = await getBestSaleProductsAPI();
       setProductsData(res.data);
+      const listBestSelling = res.data.filter((product) => {
+        return product.isBestSelling === true;
+      });
+      setListBestSelling(listBestSelling);
+      const AdidasBrandOffice = res.data.filter((product) => {
+        return product.brand === "Adidas";
+      });
+      const nikeBrandOffice = res.data.filter((product) => {
+        return product.brand === "Nike";
+      });
+      const pumaBrandOffice = res.data.filter((product) => {
+        return product.brand === "Puma";
+      });
+      setAdidasBrand(AdidasBrandOffice);
+      setNikeBrand(nikeBrandOffice);
+      setPumaBrand(pumaBrandOffice);
     } catch (error) {
       toast({
         title: "Api error",
@@ -79,7 +99,10 @@ const Home = () => {
         sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
       >
         <Box>
-          <BestSaleSection isMobile={isMobile} data={productsData} navigate={navigate} />
+          <BestSaleSection isMobile={isMobile} data={listBestSelling} navigate={navigate} />
+          {<BestSaleSection isMobile={isMobile} data={adidasBrand} navigate={navigate} />}
+          {<BestSaleSection isMobile={isMobile} data={nikeBrand} navigate={navigate} />}
+          {<BestSaleSection isMobile={isMobile} data={pumaBrand} navigate={navigate} />}
           <AboutUsSection isMobile={isMobile} navigate={navigate} />
           <SupportSection isMobile={isMobile} data={supporterData} />
         </Box>
@@ -101,7 +124,16 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
             textTransform="uppercase"
             pt={5}
           >
-            <FormattedMessage id="label.bestSelling" />
+            {data?.some((item) => item.brand === "Adidas" && item.isBestSelling === false) === true ? (
+              <FormattedMessage id="label.adidasOffical" />
+            ) : data?.some((item) => item.brand === "Nike" && item.isBestSelling === false) === true ? (
+              <FormattedMessage id="label.nikeOffical" />
+            ) : data?.some((item) => item.brand === "Puma" && item.isBestSelling === false) === true ? (
+              <FormattedMessage id="label.pumaOffical" />
+            ) : (
+              <FormattedMessage id="label.bestSelling" />
+            )}
+            {/* <FormattedMessage id="label.bestSelling" /> */}
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
@@ -194,7 +226,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
               </Text>
               <Flex bg="black" w={97} h="3px" m="auto" />
             </Box>
-            <Image h="334px" px={10} pt={0} src="/images/about_us_picture.png" />
+            <Image h="334px" px={10} pt={0} src="/images/home_aboutUs.jpg" />
             <Text px={10} fontSize="10px" textAlign="justify">
               <FormattedMessage id="info.aboutUsSection" />
             </Text>
