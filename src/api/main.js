@@ -75,3 +75,7 @@ export const getAllProductsAPI = async () => {
   return Products;
 };
 
+// ** Slide Bar Home
+export const getImgSlideBarHomeAPI = async () => {
+  return (axios.get(`${process.env.REACT_APP_API_URL}/slidebarhome`))
+}
