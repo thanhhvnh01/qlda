@@ -43,7 +43,9 @@
   "label.hairStyle": "Прическа",
   "label.description": "Описание",
   "label.packing": "Упаковка",
-  "label.AdidasOffice": "Giày Adidas chính hãng",
+  "label.adidasOffical": "Giày Adidas chính hãng",
+  "label.nikeOffical": "Giày Nike chính hãng",
+  "label.pumaOffical": "Giày Puma chính hãng",
 
   "/* info */": "info",
   "info.address": "Dong Bich , Dong Tho, Yen Phong, Bac Ninh",

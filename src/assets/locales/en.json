@@ -44,7 +44,9 @@
   "label.hairStyle": "Hair style",
   "label.description": "Description",
   "label.packing": "Packing",
-  "label.AdidasOffice": "Adidas shoes offical",
+  "label.adidasOffical": "Adidas shoes offical",
+  "label.nikeOffical": "Nike shoes offical",
+  "label.pumaOffical": "Puma shoes offical",
 
   "/* info */": "info",
   "info.address": "Dong Bich , Dong Tho, Yen Phong, Bac Ninh",
