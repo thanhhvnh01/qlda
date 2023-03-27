@@ -457,6 +457,7 @@ const ProductSection = ({
                   thumbImage={item.image[0]}
                   images={item.image}
                   subtitle={item.brand}
+                  price={item.price}
                   onClick={() => {
                     handleOnClick(item);
                   }}

@@ -110,6 +110,7 @@ const ProductSlider = ({ data, isMobile }) => {
                 onClick={() => {
                   handleOnClick(item);
                 }}
+                price={item.price}
               />
             );
           })}
@@ -132,6 +133,7 @@ const ProductSlider = ({ data, isMobile }) => {
                 onClick={() => {
                   handleOnClick(item);
                 }}
+                price={item.price}
               />
             );
           })}
@@ -154,6 +156,7 @@ const ProductSlider = ({ data, isMobile }) => {
                 onClick={() => {
                   handleOnClick(item);
                 }}
+                price={item.price}
               />
             );
           })}

@@ -72,7 +72,7 @@
   "button.subscribe": "Subscribe",
   "button.sendMessage": " Send Message",
   "button.clearFilter": "Clear",
-  "button.contact": "Contact",
+  "button.addCart": "Add to cart",
 
   "/* enum */": "enum",
   "enum.undefined": "Enum undefined",

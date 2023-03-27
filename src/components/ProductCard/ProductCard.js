@@ -2,7 +2,7 @@ import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
-const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick, isBestSelling }) => {
+const ProductCard = ({ title, subtitle, price, thumbImage, images, sx, onClick, isBestSelling }) => {
   const [hoverImage, setHoverImage] = useState(null);
   const [isHover, setIsHover] = useState(false);
 
@@ -52,6 +52,9 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick, isBestS
         <Box sx={{ bottom: 0 }} mb={2} ml={1}>
           <Text textTransform="none" fontSize="12px" color="#AAAAAA">
             {`${subtitle}`}
+          </Text>
+          <Text textTransform="none" fontSize="12px" color="#FF0000">
+            {Intl.NumberFormat("vi", { style: "currency", currency: "vnd" }).format(price)}
           </Text>
           {isHover && (
             <HStack display={["none", "none", "none", "flex", "flex"]}>

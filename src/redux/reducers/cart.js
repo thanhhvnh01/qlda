@@ -3,7 +3,6 @@ import { ACTION_TYPES } from "@store/actionTypes";
 // **  Initial State
 const initialState = {
   numberCart: 0,
-  restaurantName: "",
   carts: [],
   products: [],
 };
@@ -27,6 +26,7 @@ const cartReducer = (state = initialState, action) => {
           productName: action.data.productName,
           image: action.data.image,
           price: action.data.price,
+          size: action.data.size,
         };
         state.carts.push(cart);
       } else {

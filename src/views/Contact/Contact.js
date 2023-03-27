@@ -158,7 +158,8 @@ const Contact = () => {
                 >
                   <FormattedMessage id="label.contactInformation" />
                 </Text>
-                <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+
+                {/* <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
                   <FormattedMessage id="label.saySomething" />
                 </Text>
                 <VStack alignItems="flex-start" mt={5} spacing={4}>
@@ -180,7 +181,7 @@ const Contact = () => {
                       <FormattedMessage id="info.address" />
                     </Text>
                   </HStack>
-                </VStack>
+                </VStack> */}
               </Box>
             </GridItem>
             <GridItem w="100%" colSpan={5} sx={{ mt: "auto", mb: "auto", display: "flex" }}>

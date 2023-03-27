@@ -1,4 +1,4 @@
-import { getProductDetailsAPI, getRelateProductAPI } from "@api/main";
+import { getProductDetailsAPI, getProductsAPI, getRelateProductAPI } from "@api/main";
 import {
   AspectRatio,
   Box,
@@ -51,17 +51,23 @@ const ProductDetails = () => {
     scrollToTop();
   }, [productId]);
 
-  const fetchData = async (productId, initLang) => {
+  const fetchData = async () => {
     if (!!productId) {
       try {
-        const res = await getProductDetailsAPI(productId, initLang);
-        setData(res.data);
+        const res = await getProductsAPI();
+        const productData = res.data.filter((i) => {
+          return i.productId === Number(productId);
+        });
+        // console.log(productData);
+        setData(productData[0]);
       } catch (error) {}
     }
   };
+  console.log(data);
+  // console.log(typeof productId);
 
   useEffect(() => {
-    fetchData(productId, initLang);
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
@@ -78,11 +84,6 @@ const ProductDetails = () => {
     fetchRelatedProductData(productId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
-
-  //* actions
-  const handleColorClick = (item) => {
-    navigate(`/product/details?productId=${item.productId}`);
-  };
 
   return (
     <>
@@ -117,12 +118,12 @@ const ProductDetails = () => {
                   sx={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
                   w={["390px", "390px", "460px", "460px", "480px"]}
                   h={["390px", "390px", "460px", "460px", "480px"]}
-                  src={data?.imageUrls[imageIndex]}
+                  src={data?.image[imageIndex]}
                 />
               </Center>
               <Center mt={4}>
                 <HStack spacing="27px">
-                  {data?.imageUrls.map((image, index) => {
+                  {data?.image?.map((image, index) => {
                     return (
                       <Image
                         onClick={() => {
@@ -152,9 +153,9 @@ const ProductDetails = () => {
                   <Text fontWeight="bold">
                     <FormattedMessage id="label.color" />:{" "}
                   </Text>
-                  <Text>{data?.colorName}</Text> {data?.colorCode.length === 1 && <Text>{data?.colorCode[0]}</Text>}
+                  {/* <Text>{data?.colorName}</Text> {data?.colorCode.length === 1 && <Text>{data?.colorCode[0]}</Text>} */}
                 </HStack>
-                <HStack sx={{ cursor: "pointer" }}>
+                {/* <HStack sx={{ cursor: "pointer" }}>
                   <Box
                     width={["32px", "32px", "35px", "35px", "35px"]}
                     height={["32px", "32px", "35px", "35px", "35px"]}
@@ -183,7 +184,7 @@ const ProductDetails = () => {
                       />
                     );
                   })}
-                </HStack>
+                </HStack> */}
               </VStack>
               <VStack alignItems="flex-start" p={3}>
                 <VStack alignItems="flex-start" spacing="10px">
@@ -245,7 +246,7 @@ const ProductDetails = () => {
                     color="#ffff"
                     onClick={onOpen}
                   >
-                    <FormattedMessage id="button.contact" />
+                    <FormattedMessage id="button.addCart" />
                   </Button>
                 </VStack>
               </VStack>
