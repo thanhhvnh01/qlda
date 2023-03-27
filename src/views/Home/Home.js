@@ -17,7 +17,7 @@ import { useInView } from "react-intersection-observer";
 import { FormattedMessage } from "react-intl";
 // slider
 import { getErrorMessage } from "@api/handleApiError";
-import { getBestSaleProductsAPI, getSupportersAPI } from "@api/main";
+import { getBestSaleProductsAPI, getImgSlideBarHomeAPI, getSupportersAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
@@ -89,6 +89,26 @@ const Home = () => {
     fetchSupporterData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fetchImageSildeBarHome = async () => {
+    try {
+      const res = await getImgSlideBarHomeAPI();
+      setSlideImages(res.data);
+      console.log(res.data)
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchImageSildeBarHome();
+  }, []);
+
 
   return (
     <>
@@ -179,7 +199,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
           <Flex mx="auto" justifyContent="center">
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <GridItem colSpan={1} display="flex" ml="auto">
-                <Image src="/images/about_us_picture.png" />
+                <Image src="/images/home_aboutUs.jpg" />
               </GridItem>
               <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
                 <Box>
