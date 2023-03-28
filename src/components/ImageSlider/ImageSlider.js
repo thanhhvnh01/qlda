@@ -11,7 +11,7 @@ const ImageSlider = ({ images }) => {
   return (
     <Container p={0} maxW={["100%", "100%", "100%", "1200px", "1200px"]}>
       <Box mt={["87px", "87px", "113px", "113px", "113px"]} w="100%" h={["128px", "auto", "auto", "auto", "auto"]}>
-        {/* <Carousel
+        <Carousel
           showThumbs={false}
           infiniteLoop
           autoPlay
@@ -19,18 +19,19 @@ const ImageSlider = ({ images }) => {
           showStatus={false}
           interval={6000}
           className="slide-container"
-        > */}
-        {/* {images?.map((slideImage, index) => (
+        >
+          {images?.map((slideImage, index) => (
             <Box key={index} sx={{ position: "relative", color: "#ffff", textAlign: "center" }}>
-              {console.log(slideImage)} */}
-        <Image
-          src="/images/background-header.png"
-          h={["128px", "184px", "184px", "auto", "auto"]}
-          sx={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
-        />
-        {/* </Box>
-          ))} */}
-        {/* </Carousel> */}
+              {console.log(`${slideImage?.url}`)}
+              
+              <Image
+                src={`${slideImage?.url}`}
+                h={["128px", "184px", "184px", "auto", "auto"]}
+                sx={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
+              />
+            </Box>
+          ))}
+        </Carousel>
       </Box>
     </Container>
   );

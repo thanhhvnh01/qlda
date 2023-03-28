@@ -94,7 +94,7 @@ const Home = () => {
     try {
       const res = await getImgSlideBarHomeAPI();
       setSlideImages(res.data);
-      console.log(res.data)
+      console.log(res)
     } catch (error) {
       toast({
         title: "Api error",
