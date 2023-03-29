@@ -15,7 +15,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import ProductSlider from "@components/ProductSlider";
+import SizeRadioBox from "@components/SizeRadioBox";
 import useMobile from "@hooks/useMobile";
+import { handleAddCartAC } from "@store/actions/cart";
 import {
   HairStyleDisplayConfig,
   LengthMeasureUnitDisplayConfig,
@@ -25,16 +27,17 @@ import {
 } from "@utility/constant";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import ContactModal from "./ContactModal";
 
 const ProductDetails = () => {
-  const initLang = localStorage.getItem("language");
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const [isMobile] = useMobile();
   const navigate = useNavigate();
   const query = useLocation().search;
   const productId = new URLSearchParams(query).get("productId");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [size, setSize] = useState("41");
   const [data, setData] = useState();
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
@@ -55,16 +58,18 @@ const ProductDetails = () => {
     if (!!productId) {
       try {
         const res = await getProductsAPI();
+
         const productData = res.data.filter((i) => {
           return i.productId === Number(productId);
         });
-        // console.log(productData);
+        const related = res.data.filter((i) => {
+          return i.brand === productData[0].brand;
+        });
         setData(productData[0]);
+        setRelatedProductData(related);
       } catch (error) {}
     }
   };
-  console.log(data);
-  // console.log(typeof productId);
 
   useEffect(() => {
     fetchData();
@@ -84,6 +89,17 @@ const ProductDetails = () => {
     fetchRelatedProductData(productId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
+
+  const handleAddCartItem = () => {
+    dispatch(
+      handleAddCartAC({
+        productId: data.productId,
+        productName: data.productName,
+        price: data.price,
+        size: 40,
+      })
+    );
+  };
 
   return (
     <>
@@ -153,90 +169,12 @@ const ProductDetails = () => {
                   <Text fontWeight="bold">
                     <FormattedMessage id="label.color" />:{" "}
                   </Text>
-                  {/* <Text>{data?.colorName}</Text> {data?.colorCode.length === 1 && <Text>{data?.colorCode[0]}</Text>} */}
                 </HStack>
-                {/* <HStack sx={{ cursor: "pointer" }}>
-                  <Box
-                    width={["32px", "32px", "35px", "35px", "35px"]}
-                    height={["32px", "32px", "35px", "35px", "35px"]}
-                    bg={
-                      data?.colorCode.length > 1
-                        ? `linear-gradient(to bottom,${data?.colorCode[0]}, ${data?.colorCode[1]} 100%)`
-                        : `${data?.colorCode[0]}`
-                    }
-                    borderRadius="50%"
-                  />
-                  {data?.referenceProducts.map((a, i) => {
-                    return (
-                      <Box
-                        onClick={() => {
-                          handleColorClick(a);
-                        }}
-                        key={i}
-                        width={["32px", "32px", "35px", "35px", "35px"]}
-                        height={["32px", "32px", "35px", "35px", "35px"]}
-                        bg={
-                          a?.colorCode.length > 1
-                            ? `linear-gradient(to bottom,${a?.colorCode[0]}, ${a?.colorCode[1]} 100%)`
-                            : `${a?.colorCode[0]}`
-                        }
-                        borderRadius="50%"
-                      />
-                    );
-                  })}
-                </HStack> */}
               </VStack>
               <VStack alignItems="flex-start" p={3}>
                 <VStack alignItems="flex-start" spacing="10px">
-                  <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.material" />:
-                    </Text>
-                    <Text>
-                      <FormattedMessage id={`enum.${MaterialTypeDisplayConfig[data?.materialTypeId]}`} />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.origin" />:{" "}
-                    </Text>
-                    <Text>{data?.origin}</Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.length" />:
-                    </Text>
-                    <Text>
-                      {data?.fromLength} - {data?.toLength}{" "}
-                      <FormattedMessage id={`enum.${LengthMeasureUnitDisplayConfig[data?.measureUnitLengthId]}`} />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.weight" />:
-                    </Text>
-                    <Text>
-                      {data?.weight}{" "}
-                      <FormattedMessage id={`enum.${WeightMeasureUnitDisplayConfig[data?.measureUnitWeightId]}`} />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.hairStyle" />:{" "}
-                    </Text>
-                    <Text>
-                      <FormattedMessage id={`enum.${HairStyleDisplayConfig[data?.hairStyleId]}`} />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Text>
-                      <b>
-                        <FormattedMessage id="label.packing" />:
-                      </b>{" "}
-                      <FormattedMessage id={`enum.${PackingRuleDisplayConfig[data?.packingRuleId]}`} />
-                    </Text>
-                    <Text></Text>
-                  </HStack>
+                  <Text>Size: </Text>
+                  <SizeRadioBox setSize={setSize} />
                   <Button
                     _hover={{
                       boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);",
@@ -244,35 +182,12 @@ const ProductDetails = () => {
                     variant="solid"
                     bg="tomato"
                     color="#ffff"
-                    onClick={onOpen}
+                    onClick={handleAddCartItem}
                   >
                     <FormattedMessage id="button.addCart" />
                   </Button>
                 </VStack>
               </VStack>
-            </GridItem>
-          </Grid>
-        </Box>
-        <Box mt={10} px={4}>
-          <Grid templateColumns="repeat(7,1fr)">
-            <GridItem colSpan={[7, 4, 4, 4, 4]}>
-              <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>
-                <iframe title="video" src={data?.videoUrl} allowFullScreen />
-              </AspectRatio>
-            </GridItem>
-            <GridItem p={3} h="100%" colSpan={[7, 3, 3, 3, 3]}>
-              <Grid h="100%" templateRows="repeat(2,1fr)">
-                <GridItem rowSpan={1}>
-                  <HStack>
-                    <Text textAlign="justify">
-                      <b>
-                        <FormattedMessage id="label.description" />:{" "}
-                      </b>
-                      {data?.description}
-                    </Text>
-                  </HStack>
-                </GridItem>
-              </Grid>
             </GridItem>
           </Grid>
         </Box>
@@ -295,7 +210,6 @@ const ProductDetails = () => {
             </Box>
           </Box>
         )}
-        {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} productId={productId} />}
       </Container>
     </>
   );

@@ -47,7 +47,7 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         <NavbarItem to="/our-story">
           <FormattedMessage id="title.ourStory" />
         </NavbarItem>
-        <DropDownSubmenu
+        {/* <DropDownSubmenu
           data={dropDownData}
           title={
             <Flex
@@ -71,7 +71,10 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
               </HStack>
             </Flex>
           }
-        />
+        /> */}
+        <NavbarItem to="/products">
+          <FormattedMessage id="title.products" />
+        </NavbarItem>
 
         <Flex
           className="navbar-item"
