@@ -22,7 +22,7 @@ import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 
 const Home = () => {
   const initLang = localStorage.getItem("language");
@@ -31,7 +31,6 @@ const Home = () => {
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
   const [listBestSelling, setListBestSelling] = useState([]);
-  const [supporterData, setSupporterData] = useState([]);
   const [adidasBrand, setAdidasBrand] = useState([]);
   const [nikeBrand, setNikeBrand] = useState([]);
   const [pumaBrand, setPumaBrand] = useState([]);
@@ -77,25 +76,6 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initLang]);
 
-  const fetchSupporterData = async () => {
-    try {
-      const res = await getSupportersAPI(3, 1);
-      setSupporterData(res.data);
-    } catch (error) {
-      toast({
-        title: "Api error",
-        description: getErrorMessage(error),
-        status: "error",
-        duration: 3000,
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchSupporterData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const fetchImageSildeBarHome = async () => {
     try {
       const res = await getImgSlideBarHomeAPI();
@@ -125,15 +105,15 @@ const Home = () => {
       >
         {console.log(isLoading)}
         {isLoading ? (
-          <ReactLoading type={'spin'} color={'orange'} height={"10%"} width={"10%"} />
+          <ReactLoading type={"spin"} color={"orange"} height={"10%"} width={"10%"} />
         ) : (
           <Box>
             <BestSaleSection isMobile={isMobile} data={listBestSelling} navigate={navigate} />
-            {<BestSaleSection isMobile={isMobile} data={adidasBrand} navigate={navigate} />}
-            {<BestSaleSection isMobile={isMobile} data={nikeBrand} navigate={navigate} />}
-            {<BestSaleSection isMobile={isMobile} data={pumaBrand} navigate={navigate} />}
+            <BestSaleSection isMobile={isMobile} data={adidasBrand} navigate={navigate} />
+            <BestSaleSection isMobile={isMobile} data={nikeBrand} navigate={navigate} />
+            <BestSaleSection isMobile={isMobile} data={pumaBrand} navigate={navigate} />
             <AboutUsSection isMobile={isMobile} navigate={navigate} />
-            <SupportSection isMobile={isMobile} data={supporterData} />
+            {/* <SupportSection isMobile={isMobile} data={supporterData} /> */}
           </Box>
         )}
       </Container>
@@ -169,31 +149,6 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
         </Box>
         <Box bg="#FFFF" p={isMobile ? 0 : 0}>
           <ProductSlider data={data} isMobile={isMobile} />
-          {/* <Grid
-            templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)", "repeat(4, 1fr)"]}
-          >
-            {data.map((item, index) => {
-              return (
-                <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
-                  <ProductCard
-                    sx={{
-                      mb: 1,
-                      mx: "auto",
-                    }}
-                    key={index}
-                    isBestSelling={item.isBestSelling}
-                    title={item.productName}
-                    thumbImage={item.mainImageUrl}
-                    images={item.imageUrls}
-                    subtitle={item.productTypeName}
-                    // onClick={() => {
-                    //   handleOnClick(item);
-                    // }}
-                  />
-                </GridItem>
-              );
-            })}
-          </Grid> */}
         </Box>
       </Box>
     </SlideFade>
@@ -280,49 +235,49 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
   );
 };
 
-const SupportSection = ({ isMobile, data }) => {
-  const { ref, inView } = useInView();
-  return (
-    <Box bgImage="url('/backgrounds/support_background.png')">
-      <SlideFade ref={ref} in={inView} offsetY="100px">
-        <Box pb={5}>
-          <Text
-            pt={10}
-            fontSize={["20px", "20px", "20px", "40px", "40px"]}
-            fontWeight="bold"
-            textAlign="center"
-            textTransform="uppercase"
-          >
-            <FormattedMessage id="label.supportOnline" />
-          </Text>
-          <Flex bg="black" w={97} h="3px" m="auto" />
-          <Grid mt={2} templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
-            {data?.map((item, index) => {
-              return (
-                <GridItem
-                  sx={{ display: "flex", justifyContent: "center" }}
-                  key={index}
-                  colSpan={1}
-                  p={["10px", "20px", "20px", "50px", "50px"]}
-                  pt={3}
-                >
-                  <SupporterCard
-                    isMobile={isMobile}
-                    image={item.avatarUrl}
-                    name={item.supporterName}
-                    email={item.email}
-                    fb={item.facebookUrl}
-                    ig={item.instagramUrl}
-                    whatsapp={item.whatsappPhoneNumber}
-                  />
-                </GridItem>
-              );
-            })}
-          </Grid>
-        </Box>
-      </SlideFade>
-    </Box>
-  );
-};
+// const SupportSection = ({ isMobile, data }) => {
+//   const { ref, inView } = useInView();
+//   return (
+//     <Box bgImage="url('/backgrounds/support_background.png')">
+//       <SlideFade ref={ref} in={inView} offsetY="100px">
+//         <Box pb={5}>
+//           <Text
+//             pt={10}
+//             fontSize={["20px", "20px", "20px", "40px", "40px"]}
+//             fontWeight="bold"
+//             textAlign="center"
+//             textTransform="uppercase"
+//           >
+//             <FormattedMessage id="label.supportOnline" />
+//           </Text>
+//           <Flex bg="black" w={97} h="3px" m="auto" />
+//           <Grid mt={2} templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
+//             {data?.map((item, index) => {
+//               return (
+//                 <GridItem
+//                   sx={{ display: "flex", justifyContent: "center" }}
+//                   key={index}
+//                   colSpan={1}
+//                   p={["10px", "20px", "20px", "50px", "50px"]}
+//                   pt={3}
+//                 >
+//                   <SupporterCard
+//                     isMobile={isMobile}
+//                     image={item.avatarUrl}
+//                     name={item.supporterName}
+//                     email={item.email}
+//                     fb={item.facebookUrl}
+//                     ig={item.instagramUrl}
+//                     whatsapp={item.whatsappPhoneNumber}
+//                   />
+//                 </GridItem>
+//               );
+//             })}
+//           </Grid>
+//         </Box>
+//       </SlideFade>
+//     </Box>
+//   );
+// };
 
 export default Home;

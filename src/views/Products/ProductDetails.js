@@ -12,6 +12,7 @@ import {
   Image,
   Text,
   useDisclosure,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import ProductSlider from "@components/ProductSlider";
@@ -27,8 +28,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const toast = useToast();
   const [isMobile] = useMobile();
-  const navigate = useNavigate();
   const query = useLocation().search;
   const productId = new URLSearchParams(query).get("productId");
   const [size, setSize] = useState("41");
@@ -36,7 +37,6 @@ const ProductDetails = () => {
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
 
-  console.log(cart);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -95,6 +95,11 @@ const ProductDetails = () => {
         size: size,
       })
     );
+    toast({
+      title: "Thêm vào giỏ hàng thành công",
+      status: "success",
+      duration: 3000,
+    });
   };
 
   return (

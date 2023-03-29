@@ -25,8 +25,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getErrorMessage } from "@api/handleApiError";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartItem from "@components/CartItem/CartItem";
+import { handleDeleteCartAC } from "@store/actions/cart";
 
 const Contact = () => {
   const [isMobile] = useMobile();
@@ -35,6 +36,7 @@ const Contact = () => {
 
   const intl = useIntl();
   const toast = useToast();
+  const dispatch = useDispatch();
 
   const defaultValues = {
     firstName: "",
@@ -98,6 +100,17 @@ const Contact = () => {
   useEffect(() => {
     fetchSupporterData();
   }, []);
+
+  // action
+  const handleDeleteItem = (key) => {
+    dispatch(handleDeleteCartAC(key));
+    toast({
+      title: "Đã xóa khỏi giỏ hàng",
+      status: "error",
+      duration: 1500,
+    });
+  };
+
   return (
     <Box bg="#F5F5F5">
       <Image
@@ -159,8 +172,19 @@ const Contact = () => {
                 >
                   <FormattedMessage id="label.contactInformation" />
                 </Text>
-                {cart.carts?.map((c) => {
-                  return <CartItem image={c.image} size={c.size} price={c.price} productName={c.productName} />;
+                {cart.carts?.map((c, index) => {
+                  return (
+                    <CartItem
+                      key={index}
+                      image={c.image}
+                      size={c.size}
+                      price={c.price}
+                      productName={c.productName}
+                      onDelete={() => {
+                        handleDeleteItem(index);
+                      }}
+                    />
+                  );
                 })}
               </Box>
             </GridItem>
@@ -233,56 +257,6 @@ const Contact = () => {
             </GridItem>
           </Grid>
         </Flex>
-
-        <Box bgImage="url('/backgrounds/support_background.png')">
-          <Box pb={5}>
-            <Text
-              pt={10}
-              fontSize={["20px", "20px", "20px", "40px", "40px"]}
-              fontWeight="bold"
-              textAlign="center"
-              textTransform="uppercase"
-            >
-              <FormattedMessage id="label.supportOnline" />
-            </Text>
-            <Flex bg="black" w={97} h="3px" m="auto" />
-            <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
-              {supporterData?.map((item, index) => {
-                return (
-                  <GridItem
-                    sx={{ display: "flex", justifyContent: "center" }}
-                    key={index}
-                    colSpan={1}
-                    p={["10px", "20px", "20px", "50px", "50px"]}
-                  >
-                    <SupporterCard
-                      isMobile={isMobile}
-                      image={item.avatarUrl}
-                      name={item.supporterName}
-                      email={item.email}
-                      fb={item.facebookUrl}
-                      ig={item.instagramUrl}
-                      whatsapp={item.whatsappPhoneNumber}
-                    />
-                  </GridItem>
-                );
-              })}
-            </Grid>
-            <Button
-              variant="link"
-              className="navbar-item"
-              fontWeight="500"
-              sx={{
-                textTransform: "none",
-                textDecoration: "none",
-                display: "flex",
-                ml: "auto",
-                mr: 10,
-                color: "black",
-              }}
-            ></Button>
-          </Box>
-        </Box>
       </Container>
     </Box>
   );
