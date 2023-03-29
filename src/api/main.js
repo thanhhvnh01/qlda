@@ -49,7 +49,7 @@ export const getColorAPI = async (lang) => {
 
 // product
 export const getProductsAPI = async () => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/products`);
+  return axios.get(`https://testapi.io/api/manhj/products`);
 };
 
 export const getProductDetailsAPI = async (productId, lang) => {
@@ -77,5 +77,5 @@ export const getAllProductsAPI = async () => {
 
 // ** Slide Bar Home
 export const getImgSlideBarHomeAPI = async () => {
-  return (axios.get(`${process.env.REACT_APP_API_URL}/slidebarhome`))
-}
+  return axios.get(`https://testapi.io/api/manhj/slidebarhome`);
+};
