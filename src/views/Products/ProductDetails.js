@@ -18,13 +18,7 @@ import ProductSlider from "@components/ProductSlider";
 import SizeRadioBox from "@components/SizeRadioBox";
 import useMobile from "@hooks/useMobile";
 import { handleAddCartAC } from "@store/actions/cart";
-import {
-  HairStyleDisplayConfig,
-  LengthMeasureUnitDisplayConfig,
-  MaterialTypeDisplayConfig,
-  PackingRuleDisplayConfig,
-  WeightMeasureUnitDisplayConfig,
-} from "@utility/constant";
+
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,6 +36,7 @@ const ProductDetails = () => {
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
 
+  console.log(cart);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -93,10 +88,11 @@ const ProductDetails = () => {
   const handleAddCartItem = () => {
     dispatch(
       handleAddCartAC({
+        image: data.image[0],
         productId: data.productId,
         productName: data.productName,
         price: data.price,
-        size: 40,
+        size: size,
       })
     );
   };

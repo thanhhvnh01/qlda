@@ -25,7 +25,7 @@ const ProductCard = ({ title, subtitle, price, thumbImage, images, sx, onClick, 
     >
       <Image
         w="100%"
-        h={["233px", "238px", "238px", "360px", "360px"]}
+        h={["233px", "238px", "238px", "310px", "310px"]}
         src={hoverImage === null ? thumbImage : images[hoverImage]}
         alt="product"
       />

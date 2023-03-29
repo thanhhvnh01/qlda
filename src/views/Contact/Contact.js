@@ -15,8 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { CgMail, CgPhone } from "react-icons/cg";
-import { ImLocation2 } from "react-icons/im";
 import { Image } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useMobile from "@hooks/useMobile";
@@ -27,9 +25,12 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getErrorMessage } from "@api/handleApiError";
+import { useSelector } from "react-redux";
+import CartItem from "@components/CartItem/CartItem";
 
 const Contact = () => {
   const [isMobile] = useMobile();
+  const cart = useSelector((state) => state.cart);
   const [supporterData, setSupporterData] = useState([]);
 
   const intl = useIntl();
@@ -148,7 +149,7 @@ const Contact = () => {
 
         <Flex bg="#FFFFFF" my={5}>
           <Grid templateColumns="repeat(10, 1fr)" w="100%">
-            <GridItem colSpan={5} bg="url('/backgrounds/contact_2.jpg')">
+            <GridItem colSpan={5} bg="grey">
               <Box sx={{ p: 10 }}>
                 <Text
                   fontSize={["16px", "24px", "24px", "24px", "24px"]}
@@ -158,30 +159,9 @@ const Contact = () => {
                 >
                   <FormattedMessage id="label.contactInformation" />
                 </Text>
-
-                {/* <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                  <FormattedMessage id="label.saySomething" />
-                </Text>
-                <VStack alignItems="flex-start" mt={5} spacing={4}>
-                  <HStack mt={10}>
-                    <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
-                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                      <FormattedMessage id="info.phoneNumber" />
-                    </Text>
-                  </HStack>
-                  <HStack mt={10}>
-                    <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                      <FormattedMessage id="info.email" />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
-                    <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                      <FormattedMessage id="info.address" />
-                    </Text>
-                  </HStack>
-                </VStack> */}
+                {cart.carts?.map((c) => {
+                  return <CartItem image={c.image} size={c.size} price={c.price} productName={c.productName} />;
+                })}
               </Box>
             </GridItem>
             <GridItem w="100%" colSpan={5} sx={{ mt: "auto", mb: "auto", display: "flex" }}>

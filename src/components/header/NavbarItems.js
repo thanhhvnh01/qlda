@@ -72,9 +72,26 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
             </Flex>
           }
         /> */}
-        <NavbarItem to="/products">
-          <FormattedMessage id="title.products" />
-        </NavbarItem>
+
+        <Flex
+          alignContent="center"
+          justifyContent="center"
+          fontSize="18px"
+          fontWeight="500"
+          textTransform="uppercase"
+          //   display="block"
+        >
+          <HStack className="navbar-item" justifyContent="center">
+            <Text
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
+              <FormattedMessage id="title.products" />
+            </Text>
+          </HStack>
+        </Flex>
 
         <Flex
           className="navbar-item"
@@ -91,9 +108,25 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         >
           <FormattedMessage id="title.subscribe" />
         </Flex>
-        <NavbarItem to="/contact">
-          <Cart />
-        </NavbarItem>
+        <Flex
+          alignContent="center"
+          justifyContent="center"
+          fontSize="18px"
+          fontWeight="500"
+          textTransform="uppercase"
+          //   display="block"
+        >
+          <HStack className="navbar-item" justifyContent="center">
+            <Text
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/contact");
+              }}
+            >
+              <Cart />
+            </Text>
+          </HStack>
+        </Flex>
       </Stack>
     </Box>
   );
