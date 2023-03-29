@@ -22,7 +22,6 @@ const cartReducer = (state = initialState, action) => {
       if (state.numberCart === 0) {
         let cart = {
           productId: action.data.productId,
-          quantity: action.data.quantity,
           productName: action.data.productName,
           image: action.data.image,
           price: action.data.price,
@@ -40,10 +39,10 @@ const cartReducer = (state = initialState, action) => {
         if (!check) {
           let _cart = {
             productId: action.data.productId,
-            quantity: 1,
             productName: action.data.productName,
             image: action.data.image,
             price: action.data.price,
+            size: action.data.size,
           };
           state.carts.push(_cart);
         }
@@ -51,10 +50,6 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         numberCart: state.numberCart + 1,
-        restaurantName: action.data.restaurantName,
-        restaurantId: action.data.restaurantId,
-        lat: action.data.lat,
-        lng: action.data.lng,
       };
     case ACTION_TYPES.INCREASE_QUANTITY:
       state.carts[action.data].quantity++;
