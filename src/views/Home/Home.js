@@ -22,6 +22,7 @@ import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from 'react-loading';
 
 const Home = () => {
   const initLang = localStorage.getItem("language");
@@ -34,6 +35,7 @@ const Home = () => {
   const [adidasBrand, setAdidasBrand] = useState([]);
   const [nikeBrand, setNikeBrand] = useState([]);
   const [pumaBrand, setPumaBrand] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [slideImages, setSlideImages] = useState(["public/images/background-header.png"]);
 
   const fetchProductData = async () => {
@@ -56,13 +58,17 @@ const Home = () => {
       setAdidasBrand(AdidasBrandOffice);
       setNikeBrand(nikeBrandOffice);
       setPumaBrand(pumaBrandOffice);
+      setIsLoading(true);
     } catch (error) {
+      setIsLoading(true);
       toast({
         title: "Api error",
         description: getErrorMessage(error),
         status: "error",
         duration: 3000,
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -94,7 +100,7 @@ const Home = () => {
     try {
       const res = await getImgSlideBarHomeAPI();
       setSlideImages(res.data);
-      console.log(res)
+      console.log(res);
     } catch (error) {
       toast({
         title: "Api error",
@@ -109,7 +115,6 @@ const Home = () => {
     fetchImageSildeBarHome();
   }, []);
 
-
   return (
     <>
       <ImageSlider images={slideImages} />
@@ -118,14 +123,19 @@ const Home = () => {
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
         sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
       >
-        <Box>
-          <BestSaleSection isMobile={isMobile} data={listBestSelling} navigate={navigate} />
-          {<BestSaleSection isMobile={isMobile} data={adidasBrand} navigate={navigate} />}
-          {<BestSaleSection isMobile={isMobile} data={nikeBrand} navigate={navigate} />}
-          {<BestSaleSection isMobile={isMobile} data={pumaBrand} navigate={navigate} />}
-          <AboutUsSection isMobile={isMobile} navigate={navigate} />
-          <SupportSection isMobile={isMobile} data={supporterData} />
-        </Box>
+        {console.log(isLoading)}
+        {isLoading ? (
+          <ReactLoading type={'spin'} color={'orange'} height={"10%"} width={"10%"} />
+        ) : (
+          <Box>
+            <BestSaleSection isMobile={isMobile} data={listBestSelling} navigate={navigate} />
+            {<BestSaleSection isMobile={isMobile} data={adidasBrand} navigate={navigate} />}
+            {<BestSaleSection isMobile={isMobile} data={nikeBrand} navigate={navigate} />}
+            {<BestSaleSection isMobile={isMobile} data={pumaBrand} navigate={navigate} />}
+            <AboutUsSection isMobile={isMobile} navigate={navigate} />
+            <SupportSection isMobile={isMobile} data={supporterData} />
+          </Box>
+        )}
       </Container>
     </>
   );

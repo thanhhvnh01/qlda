@@ -42,7 +42,7 @@ const AboutUs = () => {
           p={isMobile ? 0 : 2}
           maxW={isMobile ? "100%" : "1200px"}
           height="100%"
-          bg="url('/backgrounds/support_background.png')"
+          bg="../../../public/images/home_aboutUs.png"
           sx={{
             boxShadow: "0px -5px 4px 1px rgba(0, 0, 0, 0.38)",
             minHeight: "90vh !important",
@@ -95,7 +95,6 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  <FormattedMessage id="info.question1" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -115,7 +114,6 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  <FormattedMessage id="info.question2" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -135,7 +133,6 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  <FormattedMessage id="info.question3" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
