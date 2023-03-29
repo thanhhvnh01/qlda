@@ -32,7 +32,7 @@ import MobileProductFilter from "@components/MobileProductFilter";
 import { BsFilter, BsFilterLeft } from "react-icons/bs";
 // paging
 import { getErrorMessage } from "@api/handleApiError";
-import { getProductsAPI } from "@api/main";
+import { getAllProductsAPI, getProductsAPI } from "@api/main";
 import { FormProvider } from "@components/hook-form";
 import { OrderByTypeEnum } from "@utility/constant";
 import { debounce } from "lodash";
@@ -58,7 +58,7 @@ const Products = () => {
   // product data
   const [pageSize] = useState(9);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [orderBy] = useState("productName");
   const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
