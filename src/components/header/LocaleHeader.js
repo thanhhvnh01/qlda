@@ -58,7 +58,7 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
           height: "1em",
           marginBottom: 1.5,
         }}
-        countryCode={lang === "en" ? "us" : "ru"}
+        countryCode={lang === "en" ? "us" : "vn"}
         svg
       />
       <Select
@@ -81,7 +81,7 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
           <FormattedMessage id="title.en" />
         </option>
         <option value="ru" style={{ textAlign: "center" }}>
-          <FormattedMessage id="title.ru" />
+          <FormattedMessage id="title.vi" />
         </option>
       </Select>
     </HStack>
