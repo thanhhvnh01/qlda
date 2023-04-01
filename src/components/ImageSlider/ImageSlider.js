@@ -22,8 +22,6 @@ const ImageSlider = ({ images }) => {
         >
           {images?.map((slideImage, index) => (
             <Box key={index} sx={{ position: "relative", color: "#ffff", textAlign: "center" }}>
-              {console.log(`${slideImage?.url}`)}
-              
               <Image
                 src={`${slideImage?.url}`}
                 h={["128px", "184px", "184px", "auto", "auto"]}

@@ -27,17 +27,16 @@ import useMobile from "@hooks/useMobile";
 import { useCallback, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 // icon
-import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon, SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import MobileProductFilter from "@components/MobileProductFilter";
 import { BsFilter, BsFilterLeft } from "react-icons/bs";
 // paging
 import { getErrorMessage } from "@api/handleApiError";
-import { getAllProductsAPI, getProductsAPI } from "@api/main";
+import { getProductsAPI } from "@api/main";
 import { FormProvider } from "@components/hook-form";
 import { OrderByTypeEnum } from "@utility/constant";
 import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
-import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Products = () => {
@@ -58,7 +57,7 @@ const Products = () => {
   // product data
   const [pageSize] = useState(9);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [orderBy] = useState("productName");
   const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
@@ -109,11 +108,31 @@ const Products = () => {
   // * get products
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchProductData = useCallback(
-    debounce(async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
+    debounce(async (categoryId) => {
       try {
         setIsLoading(true);
         const productRes = await getProductsAPI();
-        setProducts(productRes.data);
+        if (categoryId === "1") {
+          const adidas = productRes.data.filter((d) => {
+            return d.brand === "Adidas";
+          });
+          setProducts(adidas);
+        }
+        if (categoryId === "2") {
+          const nike = productRes.data.filter((d) => {
+            return d.brand === "Nike";
+          });
+          setProducts(nike);
+        }
+        if (categoryId === "3") {
+          const puma = productRes.data.filter((d) => {
+            return d.brand === "Puma";
+          });
+          setProducts(puma);
+        }
+        if (!categoryId) {
+          setProducts(productRes.data);
+        }
       } catch (error) {
         toast({
           title: "Api error",
@@ -129,14 +148,9 @@ const Products = () => {
   );
 
   useEffect(() => {
-    fetchProductData(pageSize, pageNumber + 1, orderByType, orderBy, keyword, initLang, {
-      categoryId: !!categoryId ? Number(categoryId) : null,
-      productTypeId: !!productTypes ? Number(productTypes) : null,
-      colorId: !!colors ? Number(colors) : null,
-      isBestSelling: isBestSelling ? true : null,
-    });
+    fetchProductData(categoryId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy, initLang, isBestSelling]);
+  }, [pageSize, pageNumber, keyword, categoryId, productTypes, orderByType, orderBy, initLang, isBestSelling]);
 
   useEffect(() => {
     if (bestSelling === "true") {
@@ -150,16 +164,13 @@ const Products = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIdParam, productTypeId, bestSelling, colorId]);
 
-  console.log(products);
   // * actions
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
   };
 
   const handleClearFilter = () => {
-    setValue("productTypes", null);
-    setValue("categoryId", null);
-    setValue("colors", null);
+    setValue("categoryId", undefined);
     setValue("isBestSelling", false);
   };
 
@@ -229,6 +240,8 @@ const Products = () => {
                       productTypeId={productTypes}
                       colorId={colors}
                       isBestSelling={isBestSelling}
+                      setData={setProducts}
+                      data={products}
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
@@ -321,7 +334,16 @@ const Products = () => {
   );
 };
 
-const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setValue, handleClearFilter }) => {
+const FilterSection = ({
+  categoryId,
+  productTypeId,
+  colorId,
+  isBestSelling,
+  setValue,
+  handleClearFilter,
+  setData,
+  data,
+}) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
@@ -345,6 +367,8 @@ const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setV
       </Flex>
       <Box sx={{ width: "100%" }}>
         <ProductFilter
+          setData={setData}
+          data={data}
           productTypeId={productTypeId}
           colorId={colorId}
           isBestSelling={isBestSelling}
@@ -473,19 +497,6 @@ const ProductSection = ({
           </GridItem>
         )}
       </Grid>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel={<ChevronRightIcon boxSize={5} color="#6B6E72" />}
-        onPageChange={handlePageChange}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel={<ChevronLeftIcon boxSize={5} color="#6B6E72" />}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        pageClassName={"pagingateItem"}
-        activeClassName={"active"}
-        forcePage={pageNumber}
-      />
     </Box>
   );
 };

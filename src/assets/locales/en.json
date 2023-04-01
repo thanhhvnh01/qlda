@@ -34,7 +34,7 @@
   "label.lastName": "Last Name",
   "label.email": "Email",
   "label.phoneNumber": "Phone Number",
-  "label.message": "Message",
+  "label.message": "Address",
   "label.relatedProduct": "Related Products",
   "label.productDetails": "Product Details",
   "label.material": "Material",
@@ -47,6 +47,7 @@
   "label.adidasOffical": "Adidas shoes offical",
   "label.nikeOffical": "Nike shoes offical",
   "label.pumaOffical": "Puma shoes offical",
+  "label.total": "Total price",
 
   "/* info */": "info",
   "info.address": "12 Chua Boc, Quang Trung, Dong Da, Ha Noi",
@@ -70,7 +71,7 @@
   "button.readMore": "Read more",
   "button.more": "More",
   "button.subscribe": "Subscribe",
-  "button.sendMessage": " Send Message",
+  "button.sendMessage": "Place your order",
   "button.clearFilter": "Clear",
   "button.addCart": "Add to cart",
 
@@ -95,7 +96,7 @@
   "enum.ClientsPackingAndLogoAccepted": "Clients packing and logo accepted",
 
   "/* placeholder */": "placeholder",
-  "placeholder.message": "Write your message...",
+  "placeholder.message": "Write your address...",
 
   "/* toast */": "toast",
   "toast.messageContactSuccess": "We've received your message, we'll contact you later",

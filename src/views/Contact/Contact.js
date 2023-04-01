@@ -9,17 +9,13 @@ import {
   GridItem,
   Grid,
   Button,
-  VStack,
   HStack,
   useToast,
 } from "@chakra-ui/react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Image } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import useMobile from "@hooks/useMobile";
-import SupporterCard from "@components/SupporterCard";
-import { getSupportersAPI, sendMessageAPI } from "@api/main";
+
 import { FormProvider, RHFInput } from "@components/hook-form";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -30,13 +26,17 @@ import CartItem from "@components/CartItem/CartItem";
 import { handleDeleteCartAC } from "@store/actions/cart";
 
 const Contact = () => {
-  const [isMobile] = useMobile();
   const cart = useSelector((state) => state.cart);
-  const [supporterData, setSupporterData] = useState([]);
 
   const intl = useIntl();
   const toast = useToast();
   const dispatch = useDispatch();
+
+  let totalCartPrice = 0;
+
+  cart.carts?.forEach((i) => {
+    totalCartPrice = totalCartPrice + i.price;
+  });
 
   const defaultValues = {
     firstName: "",
@@ -65,15 +65,7 @@ const Contact = () => {
   } = methods;
 
   const onSubmit = async (data) => {
-    const formData = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      phoneNumber: data.phoneNumber,
-      message: data.message,
-    };
     try {
-      await sendMessageAPI(formData);
       toast({
         title: "Success",
         description: intl.formatMessage({ id: "toast.messageContactSuccess" }),
@@ -89,17 +81,6 @@ const Contact = () => {
       });
     }
   };
-
-  const fetchSupporterData = async () => {
-    try {
-      const res = await getSupportersAPI(12, 1);
-      setSupporterData(res.data.pageData);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    fetchSupporterData();
-  }, []);
 
   // action
   const handleDeleteItem = (key) => {
@@ -162,13 +143,14 @@ const Contact = () => {
 
         <Flex bg="#FFFFFF" my={5}>
           <Grid templateColumns="repeat(10, 1fr)" w="100%">
-            <GridItem colSpan={5} bg="grey">
+            <GridItem colSpan={5} bg="gray">
               <Box sx={{ p: 10 }}>
                 <Text
                   fontSize={["16px", "24px", "24px", "24px", "24px"]}
                   fontWeight="bold"
                   color="#FFFFFF"
                   textTransform="uppercase"
+                  mb={2}
                 >
                   <FormattedMessage id="label.contactInformation" />
                 </Text>
@@ -186,6 +168,14 @@ const Contact = () => {
                     />
                   );
                 })}
+                <HStack justifyContent="space-between" mt={5}>
+                  <Text>
+                    <FormattedMessage id="label.total" />
+                  </Text>
+                  <Text fontWeight="bold">
+                    {Intl.NumberFormat("vi", { style: "currency", currency: "vnd" }).format(totalCartPrice)}
+                  </Text>
+                </HStack>
               </Box>
             </GridItem>
             <GridItem w="100%" colSpan={5} sx={{ mt: "auto", mb: "auto", display: "flex" }}>

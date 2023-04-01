@@ -1,6 +1,5 @@
-import { getProductDetailsAPI, getProductsAPI, getRelateProductAPI } from "@api/main";
+import { getProductsAPI } from "@api/main";
 import {
-  AspectRatio,
   Box,
   Button,
   Center,
@@ -10,8 +9,9 @@ import {
   GridItem,
   HStack,
   Image,
+  ListItem,
   Text,
-  useDisclosure,
+  UnorderedList,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -22,12 +22,11 @@ import { handleAddCartAC } from "@store/actions/cart";
 
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
   const toast = useToast();
   const [isMobile] = useMobile();
   const query = useLocation().search;
@@ -68,20 +67,6 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productId]);
-
-  const fetchRelatedProductData = async () => {
-    if (!!productId) {
-      try {
-        const productRes = await getRelateProductAPI(12, 1, productId);
-        setRelatedProductData(productRes.data.pageData);
-      } catch (error) {}
-    }
-  };
-
-  useEffect(() => {
-    fetchRelatedProductData(productId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
@@ -166,13 +151,12 @@ const ProductDetails = () => {
                 <Text fontSize={["20px", "20px", "26px", "26px", "26px"]} fontWeight="bold">
                   {data?.productName}
                 </Text>
-                <HStack>
-                  <Text fontWeight="bold">
-                    <FormattedMessage id="label.color" />:{" "}
-                  </Text>
-                </HStack>
+                <Text fontSize={["20px", "20px", "26px", "26px", "26px"]} fontWeight="bold" color="#FF0000">
+                  {Intl.NumberFormat("vi", { style: "currency", currency: "vnd" }).format(data?.price)}
+                </Text>
               </VStack>
-              <VStack alignItems="flex-start" p={3}>
+
+              <VStack alignItems="flex-start" p={3} gap={10}>
                 <VStack alignItems="flex-start" spacing="10px">
                   <Text>Size: </Text>
                   <SizeRadioBox setSize={setSize} />
@@ -188,6 +172,16 @@ const ProductDetails = () => {
                     <FormattedMessage id="button.addCart" />
                   </Button>
                 </VStack>
+                <UnorderedList borderTop="1px solid black" w="100%" p={5}>
+                  <ListItem>Đế giày cao su, Da tổng hơp</ListItem>
+                  <ListItem>Hãng: {data?.brand}</ListItem>
+                  <ListItem>Mã Sản Phẩm: {data?.productId}</ListItem>
+                  <ListItem>Nước sản xuất: Việt Nam</ListItem>
+                  <ListItem>Tặng một bộ dây giày custom !</ListItem>
+                  <ListItem>Bảo hành đổi trả 3 ngày</ListItem>
+                  <ListItem>Giao hàng trước 5 ngày sau khi đặt hàng</ListItem>
+                  <ListItem>Freeship nội thành</ListItem>
+                </UnorderedList>
               </VStack>
             </GridItem>
           </Grid>
