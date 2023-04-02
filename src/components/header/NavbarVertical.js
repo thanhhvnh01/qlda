@@ -44,7 +44,7 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
           <ProductsAccordion data={data} />
 
           <NavbarItem to="/contact">
-            <FormattedMessage id="title.contact" />
+            <FormattedMessage id="title.cart" />
           </NavbarItem>
           <NavbarItem
             onClick={() => {

@@ -84,7 +84,7 @@ const AboutUs = () => {
               <FormattedMessage id="info.describe" />
             </Text>
             <Center>
-              <Image maxWidth={["300px", "500px", "500px", "500px", "500px"]} pt={10} src="/images/about_us_1.png" />
+              <Image maxWidth={["300px", "500px", "500px", "500px", "500px"]} pt={10} src="https://live.staticflickr.com/65535/52788694270_002d3052c7_c.jpg" />
             </Center>
             <VStack pt={14} spacing={14}>
               <Box>

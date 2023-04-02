@@ -426,7 +426,7 @@ const ProductSection = ({
         <HStack>
           <HStack fontSize={["16px", "12px", "12px", "16px", "16px"]}>
             <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-            <Text>
+            <Text sx={{width: "100px"}}>
               <FormattedMessage id="label.sort" />:
             </Text>
           </HStack>

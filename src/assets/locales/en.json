@@ -8,6 +8,7 @@
   "title.subscribe": "Subscribe",
   "title.vi": "Tiếng việt",
   "title.en": "English",
+  "title.cart": "Cart",
 
   "/* label */": "label",
   "label.socialNetwork": "Social Network",
@@ -48,6 +49,8 @@
   "label.nikeOffical": "Nike shoes offical",
   "label.pumaOffical": "Puma shoes offical",
   "label.total": "Total price",
+  "label.cart": "Cart",
+  "label.cartMessage": "Please complete the payment step to experience the product",
 
   "/* info */": "info",
   "info.address": "12 Chua Boc, Quang Trung, Dong Da, Ha Noi",
@@ -74,6 +77,7 @@
   "button.sendMessage": "Place your order",
   "button.clearFilter": "Clear",
   "button.addCart": "Add to cart",
+  "button.pay": "Pay",
 
   "/* enum */": "enum",
   "enum.undefined": "Enum undefined",

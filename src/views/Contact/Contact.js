@@ -115,7 +115,7 @@ const Contact = () => {
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
               <Breadcrumb href="/contact">
-                <FormattedMessage id="title.contact" />
+                <FormattedMessage id="title.cart" />
               </Breadcrumb>
             </BreadcrumbItem>
           </Breadcrumb>
@@ -128,7 +128,7 @@ const Contact = () => {
             textAlign="center"
             textTransform="uppercase"
           >
-            <FormattedMessage id="label.contactUs" />
+            <FormattedMessage id="label.cart" />
           </Text>
           <Text
             fontSize={["12px", "12px", "12px", "18px", "18px"]}
@@ -137,7 +137,7 @@ const Contact = () => {
             textAlign="center"
             textTransform="uppercase"
           >
-            <FormattedMessage id="label.any" />
+            <FormattedMessage id="label.cartMessage" />
           </Text>
         </Box>
 
@@ -152,7 +152,7 @@ const Contact = () => {
                   textTransform="uppercase"
                   mb={2}
                 >
-                  <FormattedMessage id="label.contactInformation" />
+                  <FormattedMessage id="label.cart" />
                 </Text>
                 {cart.carts?.map((c, index) => {
                   return (
@@ -239,7 +239,7 @@ const Contact = () => {
                       fontWeight="500"
                       textTransform="none"
                     >
-                      <FormattedMessage id="button.sendMessage" />
+                      <FormattedMessage id="button.pay" />
                     </Button>
                   </Box>
                 </FormProvider>
