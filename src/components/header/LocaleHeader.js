@@ -68,7 +68,7 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
         variant="unstyled"
         fontSize={["10px", "12px", "12px", "12px", "12px"]}
         bg="black"
-        w="90px"
+        w="110px"
         borderColor="black"
         value={lang}
         onChange={(e) => {
